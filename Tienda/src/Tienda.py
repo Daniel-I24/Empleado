@@ -3,6 +3,10 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 __email__ = "ivan.igua@campusucc.edu.co"
 
+from Producto import Producto
+
+from Tipo import Tipo
+
 class Tienda:
 
     '''#----------------------------------------------------------------
@@ -18,7 +22,7 @@ class Tienda:
         # Atributos
         ----------------------------------------------------------------"""
         self.__producto1 = None
-        self.__proucto2 = None
+        self.__producto2 = None
         self.__producto3 = None
         self.__producto4 = None
         self.__dineroCaja:float = 0.0
@@ -26,6 +30,23 @@ class Tienda:
         '''#----------------------------------------------------------------
         # Metodos
         ----------------------------------------------------------------#'''
+    __method__ = "ProductoUno"
+    __parameter__ = "nombre, tipo, valorUnitario, Cantidad, CantidadMinima, subsidiado, calidad"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que agrega el producto Uno"
+    def ProductoUno(self, nombre, tipo, valorUnitario, Cantidad, CantidadMinima, subsidiado, calidad):
+        self.__producto1 = Producto(nombre, tipo, valorUnitario, Cantidad, CantidadMinima, subsidiado, calidad)
+
+    __method__ = "AbastecerTienda"
+    __parameter__ = "Ninguno"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que abastece de cuatro productos la tienda"
+    def AbastecerTienda(self):
+        self.__producto1 = Producto("Lapiz", Tipo.Papeleria, 1000, 20, 5, False, "A")
+        self.__producto2 = Producto("Aspirina", Tipo.Drogueria, 800, 50, 2, True, "A")
+        self.__producto3 = Producto("Borrador", Tipo.Papeleria, 700, 80, 10, False, "A")
+        self.__producto4 = Producto("Pan", Tipo.Supermercado, 300, 50, 4, False, "A")
+
     __method__ = "DarProducto1"
     __parameter__ = "Ninguno"
     __returns__ = "Producto1"
@@ -60,4 +81,30 @@ class Tienda:
     __Description__ = "Metodo que retorna diner en caja"
     def DarDineroenCaja(self):
         return self.__dineroCaja
+    
+    __method__ = "VenderDeTodo"
+    __parameter__ = "Ninguno"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que calcula la cantidad disponible del producto 1 y vende esa cantidad de los demas"
+    def VenderDeTodo(self):
+        cuanto = self.__producto1.DarCantidadBodega()
+        self.__producto2.Vender(cuanto)
+        self.__producto3.Vender(cuanto)
+        self.__producto4.Vender(cuanto)
+
+    __method__ = "AgregarNuevaUnidadEnBodega"
+    __parameter__ = "Ninguno"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que permite agregar un producto en bodega"
+    def AgregarNuevaUnidadEnBodega(self):
+        # self.__cantidadBodega = self.__cantidadBodega + 1
+        self.__cantidadBodega += 1
+
+    __method__ = "Pedir"
+    __parameter__ = "Cantidad"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que permite pedir unidades para la bodega"
+    def Pedir(self, cantidad):
+        self.__cantidadBodega += cantidad
+        # self.__cantidadBodega = self.__cantidadBodega + cantidad
 
