@@ -4,7 +4,7 @@ __version__ = "1.0.0"
 __email__ = "ivan.igua@campusucc.edu.co"
 
 import Constantes
-from Tipos import Tipo
+from Tipo import Tipo
 class Producto:
 
     '''#----------------------------------------------------------------
@@ -33,7 +33,7 @@ class Producto:
         self.__calidad = calidad
         self.__cantidadBodega = Cantidad
         self.__CantidadMinima = CantidadMinima
-        self-__CantidadUnidadesVendidas = 0
+        self.__CantidadUnidadesVendidas = 0
 
         '''#----------------------------------------------------------------
         # self.subsidiado = true
@@ -79,7 +79,7 @@ class Producto:
     __method__ = "DarCantidadBodega"
     __parameter__ = "Ninguno"
     __returns__ = "Cantidad en bodega"
-    __Description__ = "metodo que retorna cantidad en bodega"
+    __Description__ = "metodo que retorna Cantidad en bodega"
     def DarCantidadBodega(self):
         return self.__cantidadBodega
     
@@ -96,3 +96,106 @@ class Producto:
     __Description__ = "metodo que retorna cantidad de unidades vendidas"
     def DarCantidadUnidadesVendidas(self):
         return self.__CantidadesUnidadesVendidas
+    
+    __method__ = "DarPublicidad"
+    __parameter__ = "Ninguno"
+    __returns__ = "Mensaje publicitario de un producto"
+    __Description__ = "metodo que brinda publicidad sobre un producto"
+    def DarPublicidad(self):
+        # return "Compre el producto" +self.__nombre+ "por solo $" +self.__valorUnitario
+        return f"Compre el producto^{self.DarNombre()} por solo ${self.__valorUnitario}"
+    
+    __method__ = "EsIgual"
+    __parameter__ = "Producto"
+    __returns__ = "True or false segun el resultado"
+    __Description__ = "metodo que permite comparar el producto co otro ingresado por el usuario"
+    def EsIgual(self, producto):
+        return self.DarNombre() is producto
+    
+    __method__ = "Vender"
+    __parameter__ = "Cantidad de producto a vender"
+    __returns__ = "Ninguno"
+    __Description__ = "metodo que permite vender"
+    def Vender(self, cProducto):
+        if cProducto < self.DarCantidadBodega():
+            self.__CantidadUnidadesVendidas += self.DarCantidadBodega()
+            self.__cantidadBodega = 0
+        else:
+            self.__CantidadUnidadesVendidas += cProducto
+            self.__cantidadBodega -= cProducto
+
+    __method__ = "HaySuficiente"
+    __parameter__ = "cProducto"
+    __returns__ = "Ninguno"
+    __Description__ = "metodo que permite vender"
+    def HaySuficiente(self, cProducto):
+        # forma 1
+        suficiente = False
+
+        # if(cProducto <= self.DarCantidadBodega()):
+        #     suficiente = True
+        # else:
+        #     suficiente = False
+        # return suficiente
+    
+        # forma 2
+        # suficiente = False
+
+        # if(cProducto <= self.DarCantidadBodega()):
+        #    suficiente = True
+
+        # return suficiente
+    
+        # forma 3
+        # if(cProducto <= self.DarCantidadBodega()):
+        #    return True
+        # else:
+        #    return False
+
+        # forma 4
+        return cProducto <= self.DarCantidadBodega()
+    
+    __method__ = "DarPrecioPapeleria"
+    __parameter__ = "ConIVA"
+    __returns__ = "precio final"
+    __Description__ = "Metodo que calcula el precio final de papeleria con iva o sin iva"
+    def DarPrecioPapeleria(self, conIVA:bool):
+        precioFInal = self.DarValorUnitario()
+        if (conIVA):
+            precioFInal = precioFInal * (1 + self.IVA_PAPELERIA)
+            return precioFInal
+        
+        # return precioFInal * (1 + self.IVA_PAPELERIA)
+
+    __method__ = "AjustarPrecio"
+    __parameter__ = "Ninguno"
+    __returns__ = "Ninguno"
+    __Description__ = "Metodo que permite ajustar el precio si no se han vendido 100 unidades"
+    def AjustarPrecio(self):
+        if(self.DarCantidadUnidadesVendidas() < 100):
+            self.__valorUnitario = self.__valorUnitario * 80/100
+        else:
+            self.__valorUnitario = self.__valorUnitario * 1.1
+    
+    __method__ = "DarIva"
+    __parameter__ = "Ninguno"
+    __returns__ = "iva"
+    __Description__ = "Metodo que permite retornar el iva segun su tipo"
+    def DarIva(self):
+        
+        # iva = 0
+        # if self.DarTipo() == Tipo.PAPELERIA:
+        #    iva = self.IVA_PAPELERIA
+        # elif self.DarTipo() == Tipo.FARMACIA:
+        #    iva = self.IVA_FARMACIA
+        # else:
+        #    iva = self.IVA_SUPERMERCADO
+
+        # forma 2
+        if self.DarTipo() == Tipo.PAPELERIA:
+            return self.IVA_PAPELERIA
+        elif self.DarTipo() == Tipo.FARMACIA:
+            return self.IVA_FARMACIA
+        else:
+            return self.IVA_SUPERMERCADO
+            
