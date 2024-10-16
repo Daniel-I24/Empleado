@@ -108,3 +108,22 @@ class Tienda:
         self.__cantidadBodega += cantidad
         # self.__cantidadBodega = self.__cantidadBodega + cantidad
 
+    __method__ = "venderProducto"
+    __parameter__ = "Nombre del producto, cantidad"
+    __returns__ = "Numero de unidades efectivamente vendidas"
+    __Description__ = "El método retorna el número de unidades efectivamente vendidas"
+    def venderProducto( self, pNombreProducto, pCantidad: int):
+        if Producto.__nombre == pNombreProducto:
+            self.__CantidadUnidadesVendidas = Producto.Vender(pCantidad)
+            return self.__CantidadUnidadesVendidas
+        else:
+            return 0
+        
+    __method__ = "cuantosPapeleria"
+    __parameter__ = "Ninguno"
+    __returns__ = "Numero de productos de tipo papeleria vendidos"
+    __Description__ = "El método retorna el número de productos de tipo papeleria vendidos"    
+    def cuantosPapeleria(self):
+        if Producto.__tipo == Tipo.PAPELERIA:
+            self.__CantidadUnidadesVendidas.PAPELERIA += Producto.__CantidadUnidadesVendidas
+            return self.__CantidadUnidadesVendidas.PAPELERIA
