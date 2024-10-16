@@ -199,3 +199,28 @@ class Producto:
         else:
             return self.IVA_SUPERMERCADO
             
+def SubirValorUnitario(self):
+        if self.__valorUnitario < 1000:
+            aumento = self.__valorUnitario * 0.01
+        elif 1000 <= self.__valorUnitario <= 5000:
+            aumento = self.__valorUnitario * 0.02
+        else: 
+            aumento = self.__valorUnitario * 0.03
+
+            self.__valorUnitario += aumento
+            return self.__valorUnitario
+        
+    def hacerPedido( self, pCantidad:int ):
+        if self.__cantidadBodega < self.__CantidadMinima:
+            self.__cantidadBodega += pCantidad
+            return "Pedido realizado"
+        else:
+            return "No se realizo pedido"
+        
+    def cambiarValorUnitario(self):
+        if self.__tipo in ("Drogueria", "Papeleria"):
+            self.__valorUnitario -= self.__valorUnitario * 0.1
+        elif self.__tipo == "Supermercado":
+            self.__valorUnitario += self.__valorUnitario * 0.05
+            return self.__valorUnitario
+        
