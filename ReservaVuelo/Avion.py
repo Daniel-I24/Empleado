@@ -3,8 +3,8 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 __email__ = "ivan.igua@campusucc.edu.co"
 
-
 from Silla import Silla
+
 
 class Avion:
     
@@ -29,8 +29,8 @@ class Avion:
         self.__sillasEjecutivas[6] = Silla(7, 1, 2)
         self.__sillasEjecutivas[7] = Silla(8, 1, 1)
         # sillas economicas
-       CreacionSillasEconomicas()  # type: ignore
-       
+        CreacionSillasEconomicas()  # type: ignore
+        
     __method__ = "CreacionSillasEconomicas"
     __parameter__ = "Ninguno"
     __returns__ = "Ninguno"
@@ -52,3 +52,20 @@ class Avion:
             
         for sillaEjecutiva in self.__sillasEjecutivas:
             sillaEjecutiva.desasignarSilla()
+
+    def contarSillasEjecutivasOcupadas(self):
+        contador = 0
+        for silla in self.__sillasEjecutivas:
+            if silla.sillaAsignada():
+                contador += 1
+
+        return contador
+    
+    def buscarPasajeroEjecutivo(self, cedula: str):
+        for silla in self.__sillasEjecutivas:
+            if silla.sillaAsignada() and silla.pasajero.cedula == cedula:
+                return silla
+            return None
+                
+
+    def buscarSillaEconomicaLibre (self, ubicación: Ubicacion):
