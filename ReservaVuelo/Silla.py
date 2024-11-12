@@ -38,7 +38,7 @@ class Silla:
         self.__pasajero = None
     
     def sillaAsignada(self):
-        return self.__pasajero is not None
+        return self.__pasajero != None
     
     def darNumero(self):
         return self.__numero
