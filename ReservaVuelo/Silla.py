@@ -22,7 +22,7 @@ class Silla:
     # Constructor
     #-------------------------------------------
 
-    def _init_(self, pNumero, pClase, pUbicacion):
+    def _init_(self, pNumero, pClase:Clase, pUbicacion:Ubicacion):
         self.__numero = pNumero
         self.__clase = pClase
         self.__ubicacion = pUbicacion
